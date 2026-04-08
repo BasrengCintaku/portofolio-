@@ -8,7 +8,7 @@ export default function LoadingScreen({ onFinish }: { onFinish: () => void }) {
     const timer = setTimeout(() => {
       setVisible(false);
       setTimeout(onFinish, 500); // kasih delay biar fade out smooth
-    }, 3000); // durasi loading
+    }, 9000); // durasi loading
 
     return () => clearTimeout(timer);
   }, [onFinish]);
@@ -23,10 +23,10 @@ export default function LoadingScreen({ onFinish }: { onFinish: () => void }) {
       `}
     >
       <DotLottieReact
-        src="https://lottie.host/0c168786-4995-4d73-9a00-0c315442512e/i2LWbbE7IV.lottie"
+        src="https://lottie.host/bed46377-e16c-4a5e-91a6-3818674c8a12/Y4o69CmYML.lottie"
         autoplay
         loop
-        style={{ width: 200, height: 200 }}
+        style={{ width: 500, height: 500 }}
       />
     </div>
   );

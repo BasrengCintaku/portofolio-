@@ -84,7 +84,7 @@ export default function AboutSection() {
               shadow-[0_0_40px_rgba(251,191,36,0.3)]
               dark:shadow-[0_0_40px_rgba(251,146,60,0.2)]"
             >
-            🌵
+            🏰
             </motion.div>
 
             {/* FLOATING CARD */}
@@ -107,7 +107,7 @@ export default function AboutSection() {
           >
             <h3 className="font-display text-2xl md:text-3xl font-bold
             text-amber-900 dark:text-orange-200">
-              Muhammad Arsil Bisyari
+              Aldiof Basten
             </h3>
 
             <p className="text-sm md:text-base leading-relaxed

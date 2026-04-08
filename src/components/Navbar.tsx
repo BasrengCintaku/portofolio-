@@ -64,8 +64,8 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
             whileHover={{ scale: 1.05 }}
           >
             {/* ICON SLOT */}
-            <span className="text-2xl">🌵</span>
-            <span>Arsil | Portofolio</span>
+            <span className="text-2xl">🏰</span>
+            <span>Portofolio Dio</span>
           </motion.a>
 
           {/* Desktop Navigation */}

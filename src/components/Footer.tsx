@@ -7,13 +7,13 @@ export default function Footer() {
   const socialLinks = [
     {
       icon: Github,
-      href: 'https://github.com/Arsil203', // ← ISI DI SINI
+      href: 'https://github.com/BasrengCintaku', // ← ISI DI SINI
       label: 'GitHub',
       active: true,
     },
     {
       icon: Instagram,
-      href: 'https://instagram.com/mhd_arsll', // ← ISI DI SINI
+      href: 'https://instagram.com/diyooow._', // ← ISI DI SINI
       label: 'Instagram',
       active: true,
     },
@@ -62,7 +62,7 @@ export default function Footer() {
               animate-pulse
             " />
 
-            <span>by Arsil</span>
+            <span>by Dio</span>
           </motion.div>
 
           {/* SOCIAL */}

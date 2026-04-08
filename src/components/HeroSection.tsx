@@ -12,10 +12,10 @@ export default function HeroSection() {
   };
 
   const socialLinks = [
-    { icon: Github, link: 'https://github.com/Arsil203' },
+    { icon: Github, link: 'https://github.com/BasrengCintaku' },
     // { icon: Linkedin, link: 'https://linkedin.com/in/username' },
     // { icon: Youtube, link: 'https://youtube.com/@username' },
-    { icon: Instagram, link: 'https://instagram.com/mhd_arsll' },
+    { icon: Instagram, link: 'https://instagram.com/diyooow._' },
   ];
 
   return (
@@ -79,7 +79,7 @@ export default function HeroSection() {
               className="font-display text-4xl md:text-6xl font-bold mb-4
               text-amber-900 dark:text-orange-200"
             >
-              Muhammad Arsil Bisyari
+              Aldiof Basten
             </motion.h1>
 
             <motion.p
