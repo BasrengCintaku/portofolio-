@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Award, ExternalLink, Calendar } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const certificates = [
   {
@@ -9,7 +8,6 @@ const certificates = [
     date: '2024',
     credentialId: 'AWS-SAA-123456',
     image: '🏆',
-    color: 'from-orange-500/20 to-yellow-500/20',
     link: '#',
   },
   {
@@ -18,7 +16,6 @@ const certificates = [
     date: '2023',
     credentialId: 'GCP-PCD-789012',
     image: '☁️',
-    color: 'from-blue-500/20 to-cyan-500/20',
     link: '#',
   },
   {
@@ -27,7 +24,6 @@ const certificates = [
     date: '2023',
     credentialId: 'META-FE-345678',
     image: '⚛️',
-    color: 'from-blue-600/20 to-indigo-500/20',
     link: '#',
   },
   {
@@ -36,7 +32,6 @@ const certificates = [
     date: '2023',
     credentialId: 'MDB-DEV-901234',
     image: '🍃',
-    color: 'from-green-500/20 to-emerald-500/20',
     link: '#',
   },
   {
@@ -45,7 +40,6 @@ const certificates = [
     date: '2022',
     credentialId: 'CKA-567890',
     image: '⚙️',
-    color: 'from-indigo-500/20 to-purple-500/20',
     link: '#',
   },
   {
@@ -54,75 +48,141 @@ const certificates = [
     date: '2022',
     credentialId: 'PSM-I-234567',
     image: '📋',
-    color: 'from-teal-500/20 to-cyan-500/20',
     link: '#',
   },
 ];
 
 export default function CertificatesSection() {
   return (
-    <section id="certificates" className="py-20 md:py-32">
-      <div className="container mx-auto px-4">
+    <section
+      id="certificates"
+      className="
+      py-20 md:py-32 px-4
+      bg-gradient-to-b 
+      from-orange-200 via-yellow-50 to-amber-100
+      dark:from-stone-900 dark:via-neutral-900 dark:to-zinc-900
+    "
+    >
+      <div className="max-w-7xl mx-auto">
+
+        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-medium mb-2 block">Kredensial</span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Sertifikat &amp; Lisensi
+          <span className="text-amber-700 dark:text-orange-300 font-medium mb-2 block">
+            Kredensial
+          </span>
+
+          <h2 className="
+            text-3xl md:text-5xl font-bold mb-4
+            text-amber-900 dark:text-orange-200
+          ">
+            Sertifikat & Lisensi
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+
+          <div className="w-20 h-1 bg-amber-400 mx-auto rounded-full" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        {/* GRID */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
           {certificates.map((cert, index) => (
             <motion.div
               key={cert.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -8 }}
               className="group"
             >
-              <div className="h-full p-6 glass rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2">
-                <div className={`w-16 h-16 rounded-xl mb-4 flex items-center justify-center bg-gradient-to-br ${cert.color}`}>
-                  <span className="text-3xl">{cert.image}</span>
+              <div
+                className="
+                h-full p-6 rounded-2xl
+                bg-white/60 backdrop-blur
+                border border-amber-200
+                shadow-md hover:shadow-xl
+                transition-all duration-300
+
+                dark:bg-zinc-800/60
+                dark:border-zinc-700
+              "
+              >
+
+                {/* ICON */}
+                <div className="
+                  w-14 h-14 flex items-center justify-center rounded-xl mb-4
+                  bg-gradient-to-br from-amber-300 to-yellow-200
+                  dark:from-orange-500/20 dark:to-amber-500/20
+                ">
+                  <span className="text-2xl">{cert.image}</span>
                 </div>
-                
+
+                {/* CONTENT */}
                 <div className="space-y-3">
+
+                  {/* TITLE */}
                   <div className="flex items-start gap-2">
-                    <Award className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                    <h3 className="font-display text-lg font-bold group-hover:text-primary transition-colors">
+                    <Award className="h-5 w-5 text-amber-600 dark:text-orange-300 mt-1 shrink-0" />
+
+                    <h3 className="
+                      text-lg font-bold
+                      text-amber-900 dark:text-orange-200
+                      group-hover:text-amber-600 dark:group-hover:text-orange-400
+                      transition
+                    ">
                       {cert.title}
                     </h3>
                   </div>
-                  
-                  <p className="text-sm text-muted-foreground">
+
+                  {/* ISSUER */}
+                  <p className="
+                    text-sm
+                    text-amber-800 dark:text-orange-200/80
+                  ">
                     {cert.issuer}
                   </p>
-                  
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+
+                  {/* DATE */}
+                  <div className="
+                    flex items-center gap-2 text-sm
+                    text-amber-700 dark:text-orange-300
+                  ">
                     <Calendar className="h-4 w-4" />
                     <span>{cert.date}</span>
                   </div>
-                  
-                  <p className="text-xs text-muted-foreground/70 font-mono">
+
+                  {/* ID */}
+                  <p className="
+                    text-xs font-mono
+                    text-amber-600 dark:text-orange-300/70
+                  ">
                     ID: {cert.credentialId}
                   </p>
-                  
-                  <Button variant="outline" size="sm" className="rounded-full mt-2" asChild>
-                    <a href={cert.link} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-1" />
-                      Verifikasi
-                    </a>
-                  </Button>
+
+                  {/* BUTTON */}
+                  <a
+                    href={cert.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      inline-flex items-center gap-1 text-sm mt-2 px-3 py-1.5 rounded-full
+                      bg-amber-200 text-amber-900
+                      hover:bg-amber-400
+                      dark:bg-zinc-700 dark:text-orange-300 dark:hover:bg-orange-500/30
+                      transition
+                    "
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Verifikasi
+                  </a>
+
                 </div>
               </div>
             </motion.div>
           ))}
+
         </div>
       </div>
     </section>

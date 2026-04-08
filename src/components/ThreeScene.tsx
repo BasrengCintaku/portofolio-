@@ -18,7 +18,6 @@ function AnimatedSphere() {
       <Sphere ref={meshRef} args={[1, 64, 64]} position={[0, 0, 0]}>
         <MeshDistortMaterial
           color="#14b8a6"
-          attach="material"
           distort={0.4}
           speed={2}
           roughness={0.2}
@@ -100,6 +99,7 @@ function FloatingIcosahedron() {
 
 function ParticleField() {
   const count = 100;
+
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -135,11 +135,15 @@ function ParticleField() {
 
 export default function ThreeScene() {
   return (
-    <div className="absolute inset-0 -z-10">
-      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+    <div className="absolute inset-0 -z-10 pointer-events-none">
+      <Canvas
+        camera={{ position: [0, 0, 5], fov: 75 }}
+        style={{ pointerEvents: 'none' }}
+      >
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#14b8a6" />
+
         <AnimatedSphere />
         <FloatingTorus />
         <FloatingBox />

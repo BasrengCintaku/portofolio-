@@ -41,7 +41,13 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-strong shadow-card' : 'bg-transparent'
+        isScrolled
+          ? isDark
+            ? 'bg-gradient-to-r from-zinc-900/90 via-neutral-900/90 to-stone-900/90 backdrop-blur-md shadow-lg'
+            : 'bg-gradient-to-r from-amber-200/80 via-yellow-100/80 to-orange-200/80 backdrop-blur-md shadow-lg'
+          : isDark
+          ? 'bg-gradient-to-r from-zinc-900/60 via-neutral-900/60 to-stone-900/60'
+          : 'bg-gradient-to-r from-amber-100/40 via-yellow-50/40 to-orange-100/40'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -52,10 +58,14 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
               e.preventDefault();
               scrollToSection('#home');
             }}
-            className="font-display text-xl md:text-2xl font-bold text-gradient cursor-pointer"
+            className={`flex items-center gap-2 font-display text-xl md:text-2xl font-bold cursor-pointer ${
+              isDark ? 'text-orange-300' : 'text-amber-800'
+            }`}
             whileHover={{ scale: 1.05 }}
           >
-            &lt;Dev /&gt;
+            {/* ICON SLOT */}
+            <span className="text-2xl">🌵</span>
+            <span>Arsil | Portofolio</span>
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -68,7 +78,11 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium cursor-pointer"
+                className={`transition-colors font-medium cursor-pointer ${
+                  isDark
+                    ? 'text-orange-200 hover:text-orange-400'
+                    : 'text-amber-700 hover:text-orange-800'
+                }`}
                 whileHover={{ y: -2 }}
               >
                 {item.label}
@@ -78,7 +92,7 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="rounded-full"
+              className={`rounded-full ${isDark ? 'text-orange-300' : 'text-amber-800'}`}
             >
               <AnimatePresence mode="wait">
                 {isDark ? (
@@ -110,7 +124,7 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="rounded-full"
+              className={`rounded-full ${isDark ? 'text-orange-300' : 'text-amber-800'}`}
             >
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
@@ -118,6 +132,7 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`${isDark ? 'text-orange-300' : 'text-amber-800'}`}
             >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -132,7 +147,11 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-strong border-t border-border"
+            className={`md:hidden border-t ${
+              isDark
+                ? 'bg-gradient-to-b from-zinc-900 to-stone-900 border-zinc-700'
+                : 'bg-gradient-to-b from-amber-100 to-orange-200 border-orange-300'
+            }`}
           >
             <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
               {navItems.map((item) => (
@@ -143,7 +162,11 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
                     e.preventDefault();
                     scrollToSection(item.href);
                   }}
-                  className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                  className={`transition-colors font-medium py-2 ${
+                    isDark
+                      ? 'text-orange-200 hover:text-orange-400'
+                      : 'text-amber-700 hover:text-orange-900'
+                  }`}
                 >
                   {item.label}
                 </a>
