@@ -17,14 +17,14 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'kodingarsil@gmail.com',
-    href: 'mailto:kodingarsil@gmail.com',
+    value: 'basrengcapbasrial@gmail.com',
+    href: 'mailto:basrengcapbasrial@gmail.com',
   },
   {
     icon: Phone,
     label: 'Telepon',
-    value: '+62 859-5012-4923',
-    href: 'https://wa.me/6285950124923',
+    value: '+62 896-2118-0758',
+    href: 'https://wa.me/6289621180758',
   },
   {
     icon: MapPin,
