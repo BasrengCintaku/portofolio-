@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code, Palette, Database } from "lucide-react";
+import { Code, Palette, Database, Star } from "lucide-react";
 
 const skills = [
   {
@@ -37,19 +37,44 @@ export default function SkillsSection() {
     <section
       id="skills"
       className="
-      py-20 px-4
-      bg-gradient-to-b 
-      from-orange-200 via-yellow-50 to-amber-100
-      dark:from-stone-900 dark:via-neutral-900 dark:to-zinc-900
-    "
+        relative overflow-hidden py-24 md:py-32 px-4
+        /* Background selaras dengan screenshot About */
+        bg-gradient-to-b from-[#d1e9d6] via-[#e2f3e9] to-[#f0f9f1]
+        dark:from-[#04140c] dark:via-[#061a11] dark:to-[#0a2a1b]
+      "
     >
-      <div className="max-w-6xl mx-auto text-center">
+      {/* Decorative Blur - Aksen Hijau */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-30">
+        <div className="absolute top-0 left-1/4 w-72 h-72 bg-[#86efac] dark:bg-[#1a3c2a] rounded-full blur-[120px]" />
+      </div>
 
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-amber-900 dark:text-orange-200">
-          Skills
-        </h2>
+      <div className="relative z-10 max-w-6xl mx-auto">
+        
+        {/* HEADER */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center mb-20"
+        >
+          <div className="inline-flex items-center gap-2 mb-4">
+            <Star className="w-4 h-4 text-[#2d5a43] dark:text-[#86efac] fill-current" />
+            <span className="text-[#2d5a43] dark:text-[#a8d5ba] font-bold uppercase tracking-[0.3em] text-xs">
+              Keahlian
+            </span>
+            <Star className="w-4 h-4 text-[#2d5a43] dark:text-[#86efac] fill-current" />
+          </div>
+          
+          <h2 className="
+            text-4xl md:text-5xl tracking-wide
+            font-['Cinzel'] font-bold
+            text-[#1a3c2a] dark:text-[#e2f3e9]
+          ">
+            Mastery Skills
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#3d7a5a] to-transparent dark:via-[#86efac] mx-auto mt-6 rounded-full" />
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-8">
           {skills.map((skill, index) => {
             const Icon = skill.icon;
 
@@ -58,60 +83,76 @@ export default function SkillsSection() {
                 key={index}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                whileHover={{ y: -8 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -12 }}
                 className="
-                rounded-2xl p-6 text-left
-                bg-white/60 backdrop-blur
-                border border-amber-200
-                shadow-md hover:shadow-xl
-
-                dark:bg-zinc-800/60
-                dark:border-zinc-700
-              "
+                  group relative rounded-[2.5rem] p-8 transition-all duration-500
+                  /* Card Style: Glassmorphism Soft Green */
+                  bg-gradient-to-br from-white/60 to-[#a8d5ba]/20
+                  dark:from-[#163d29]/60 dark:to-[#061a11]/40
+                  backdrop-blur-xl border border-white/40 dark:border-[#2d5a43]/50
+                  shadow-[0_20px_50px_rgba(45,90,67,0.05)]
+                  hover:shadow-[0_20px_50px_rgba(45,90,67,0.15)]
+                "
               >
-                {/* ICON */}
+                {/* ICON BOX */}
                 <div className="
-                  w-12 h-12 flex items-center justify-center rounded-full mb-4
-                  bg-amber-300 text-amber-900
-                  dark:bg-orange-500/20 dark:text-orange-300
+                  w-14 h-14 flex items-center justify-center rounded-2xl mb-6
+                  bg-[#2d5a43] text-[#f0f9f1]
+                  dark:bg-[#a8d5ba] dark:text-[#061a11]
+                  shadow-lg transform group-hover:rotate-[10deg] transition-transform duration-300
                 ">
-                  <Icon size={20} />
+                  <Icon size={28} />
                 </div>
 
-                {/* TITLE */}
-                <h3 className="text-lg font-semibold mb-4 text-amber-900 dark:text-orange-200">
+                {/* CATEGORY TITLE */}
+                <h3 className="
+                  text-xl mb-8
+                  font-['Cinzel'] font-bold
+                  text-[#1a3c2a] dark:text-[#e2f3e9]
+                ">
                   {skill.title}
                 </h3>
 
-                {/* SKILL LIST */}
-                <div className="space-y-4">
+                {/* SKILLS LIST */}
+                <div className="space-y-6">
                   {skill.items.map((item, i) => (
-                    <div key={i}>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span className="text-amber-800 dark:text-orange-200/80">
+                    <div key={i} className="space-y-2">
+                      <div className="flex justify-between text-sm font-medium">
+                        <span className="text-[#2d5a43] dark:text-[#a8d5ba]">
                           {item.name}
                         </span>
-                        <span className="text-amber-700 dark:text-orange-300">
+                        <span className="text-[#1a3c2a] dark:text-[#e2f3e9]">
                           {item.level}%
                         </span>
                       </div>
 
-                      {/* PROGRESS BAR */}
-                      <div className="w-full h-2 rounded-full bg-amber-200 dark:bg-zinc-700 overflow-hidden">
+                      {/* CRYSTAL PROGRESS BAR */}
+                      <div className="
+                        w-full h-2.5 rounded-full overflow-hidden
+                        bg-black/5 dark:bg-white/5 p-[1px]
+                      ">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${item.level}%` }}
-                          transition={{ duration: 1 }}
+                          transition={{ duration: 1.5, ease: "easeOut" }}
                           className="
-                            h-full rounded-full
-                            bg-gradient-to-r from-amber-400 to-yellow-500
-                            dark:from-orange-400 dark:to-amber-500
+                            h-full rounded-full relative
+                            bg-gradient-to-r from-[#3d7a5a] via-[#86efac] to-[#3d7a5a]
+                            dark:from-[#2d5a43] dark:via-[#86efac] dark:to-[#2d5a43]
                           "
-                        />
+                        >
+                          {/* Shimmer Effect */}
+                          <div className="absolute inset-0 bg-white/20 w-full animate-pulse" />
+                        </motion.div>
                       </div>
                     </div>
                   ))}
+                </div>
+
+                {/* Subtle Background Icon Decoration */}
+                <div className="absolute -bottom-4 -right-4 opacity-[0.03] dark:opacity-[0.05] pointer-events-none">
+                  <Icon size={120} />
                 </div>
               </motion.div>
             );

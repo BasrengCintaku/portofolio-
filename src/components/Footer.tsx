@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Youtube, Instagram, Heart } from 'lucide-react';
+import { Github, Linkedin, Youtube, Instagram, Heart, Sparkles } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,13 +7,13 @@ export default function Footer() {
   const socialLinks = [
     {
       icon: Github,
-      href: 'https://github.com/BasrengCintaku', // ← ISI DI SINI
+      href: 'https://github.com/BasrengCintaku',
       label: 'GitHub',
       active: true,
     },
     {
       icon: Instagram,
-      href: 'https://instagram.com/diyooow._', // ← ISI DI SINI
+      href: 'https://instagram.com/diyow._',
       label: 'Instagram',
       active: true,
     },
@@ -21,88 +21,95 @@ export default function Footer() {
       icon: Linkedin,
       href: '#',
       label: 'LinkedIn',
-      active: false, // masih disimpan
+      active: false,
     },
     {
       icon: Youtube,
       href: '#',
       label: 'YouTube',
-      active: false, // masih disimpan
+      active: false,
     },
   ];
 
   return (
     <footer
-      className="
-      py-10
-
-      dark:from-zinc-900 dark:via-neutral-900 dark:to-stone-900
-      dark:border-zinc-700
-    "
+      className="relative py-12 overflow-hidden
+      bg-[#f0f9f1] border-t border-[#a8d5ba]/30
+      dark:bg-[#04140c] dark:border-[#2d5a43]/30"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+      {/* Decorative Blur */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#3d7a5a] to-transparent dark:via-[#86efac]" />
 
-          {/* TEXT */}
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+
+          {/* BRANDING / COPYRIGHT */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="
-              flex items-center gap-2 text-sm
-              text-amber-800
-              dark:text-orange-200/80
-            "
+            className="flex flex-col items-center md:items-start gap-2"
           >
-            <span>© {currentYear} Made with</span>
-
-            <Heart className="
-              h-4 w-4
-              text-red-500 fill-red-500
-              animate-pulse
-            " />
-
-            <span>by Dio</span>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xl">🏰</span>
+              <span className="font-['Cinzel'] font-bold tracking-tighter text-[#1a3c2a] dark:text-[#e2f3e9]">
+                KINGDOM <span className="text-[#3d7a5a] dark:text-[#86efac]">DIO</span>
+              </span>
+            </div>
+            
+            <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#2d5a43]/60 dark:text-[#a8d5ba]/60">
+              <span>© {currentYear} Created with</span>
+              <Heart className="h-3 w-3 text-red-500 fill-red-500 animate-pulse" />
+              <span>by</span>
+              <span className="text-[#1a3c2a] dark:text-[#86efac] font-['Cinzel']">Dio</span>
+            </div>
           </motion.div>
 
-          {/* SOCIAL */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4"
-          >
-            {socialLinks.map((social, i) => {
-              const Icon = social.icon;
+          {/* SOCIAL LINKS */}
+          <div className="flex flex-col items-center md:items-end gap-4">
+            <div className="flex items-center gap-3">
+              {socialLinks.map((social, i) => {
+                const Icon = social.icon;
 
-              return (
-                <motion.a
-                  key={social.label}
-                  href={social.active ? social.href : '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={social.active ? { scale: 1.15, y: -3 } : {}}
-                  className={`
-                    p-2 rounded-full transition-all
+                return (
+                  <motion.a
+                    key={social.label}
+                    href={social.active ? social.href : '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={social.active ? { scale: 1.15, y: -4 } : {}}
+                    className={`
+                      p-3 rounded-2xl transition-all duration-300 border
+                      ${social.active
+                        ? `
+                          bg-white dark:bg-[#163d29] border-[#a8d5ba]/50 dark:border-[#2d5a43]/50
+                          text-[#1a3c2a] dark:text-[#86efac] shadow-sm hover:shadow-xl
+                          hover:bg-[#2d5a43] hover:text-white dark:hover:bg-[#a8d5ba] dark:hover:text-[#061a11]
+                        `
+                        : `
+                          bg-gray-100 dark:bg-[#061a11] border-transparent
+                          text-gray-400 cursor-not-allowed opacity-40
+                        `
+                      }
+                    `}
+                    aria-label={social.label}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </motion.a>
+                );
+              })}
+            </div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-widest text-[#2d5a43]/40 dark:text-[#a8d5ba]/40"
+            >
+              <Sparkles size={10} />
+              <span>Stay Humble, Keep Building</span>
+            </motion.div>
+          </div>
 
-                    ${social.active
-                      ? `
-                        bg-amber-200 text-amber-900 hover:bg-amber-400
-                        dark:bg-zinc-800 dark:text-orange-300 dark:hover:bg-orange-500/30
-                      `
-                      : `
-                        bg-amber-100 text-amber-400 cursor-not-allowed opacity-50
-                        dark:bg-zinc-800 dark:text-zinc-500
-                      `
-                    }
-                  `}
-                  aria-label={social.label}
-                >
-                  <Icon className="h-5 w-5" />
-                </motion.a>
-              );
-            })}
-          </motion.div>
         </div>
       </div>
     </footer>

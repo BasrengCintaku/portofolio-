@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -14,7 +14,7 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -40,36 +40,51 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? isDark
-            ? 'bg-gradient-to-r from-zinc-900/90 via-neutral-900/90 to-stone-900/90 backdrop-blur-md shadow-lg'
-            : 'bg-gradient-to-r from-amber-200/80 via-yellow-100/80 to-orange-200/80 backdrop-blur-md shadow-lg'
-          : isDark
-          ? 'bg-gradient-to-r from-zinc-900/60 via-neutral-900/60 to-stone-900/60'
-          : 'bg-gradient-to-r from-amber-100/40 via-yellow-50/40 to-orange-100/40'
+          ? 'py-3'
+          : 'py-6'
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className={`
+          relative flex items-center justify-between px-6 h-16 md:h-18 rounded-[2rem]
+          transition-all duration-500 border backdrop-blur-xl
+          ${isScrolled 
+            ? 'bg-white/70 border-[#a8d5ba]/30 shadow-[0_8px_32px_rgba(26,60,42,0.1)] dark:bg-[#061a11]/80 dark:border-[#2d5a43]/40' 
+            : 'bg-transparent border-transparent'
+          }
+        `}>
+          
+          {/* LOGO */}
           <motion.a
             href="#home"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('#home');
             }}
-            className={`flex items-center gap-2 font-display text-xl md:text-2xl font-bold cursor-pointer ${
-              isDark ? 'text-orange-300' : 'text-amber-800'
-            }`}
-            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-3 cursor-pointer group"
+            whileHover={{ scale: 1.02 }}
           >
-            {/* ICON SLOT */}
-            <span className="text-2xl">🏰</span>
-            <span>Portofolio Dio</span>
+            <div className="relative">
+              <span className="text-2xl drop-shadow-lg">🏰</span>
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                className="absolute -inset-2 border-t border-r border-[#3d7a5a] dark:border-[#86efac] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+            </div>
+            <span 
+              className={`text-xl font-bold tracking-tighter uppercase font-['Cinzel'] ${
+                isDark ? 'text-[#e2f3e9]' : 'text-[#1a3c2a]'
+              }`}
+            >
+              Kingdom <span className="text-[#3d7a5a] dark:text-[#86efac]">Dio</span>
+            </span>
           </motion.a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* DESKTOP MENU */}
+          <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <motion.a
                 key={item.label}
@@ -78,38 +93,47 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className={`transition-colors font-medium cursor-pointer ${
-                  isDark
-                    ? 'text-orange-200 hover:text-orange-400'
-                    : 'text-amber-700 hover:text-orange-800'
-                }`}
+                className={`
+                  px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] font-['Cinzel']
+                  transition-all duration-300 relative group
+                  ${isDark ? 'text-[#a8d5ba] hover:text-[#86efac]' : 'text-[#2d5a43] hover:text-[#1a3c2a]'}
+                `}
                 whileHover={{ y: -2 }}
               >
                 {item.label}
+                <motion.span 
+                  className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#3d7a5a] dark:bg-[#86efac] rounded-full group-hover:w-4 transition-all"
+                />
               </motion.a>
             ))}
+
+            <div className="h-6 w-[1px] bg-[#a8d5ba]/30 mx-4" />
+
+            {/* THEME TOGGLE */}
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className={`rounded-full ${isDark ? 'text-orange-300' : 'text-amber-800'}`}
+              className={`rounded-xl hover:bg-[#a8d5ba]/20 transition-colors ${
+                isDark ? 'text-[#86efac]' : 'text-[#2d5a43]'
+              }`}
             >
               <AnimatePresence mode="wait">
                 {isDark ? (
                   <motion.div
                     key="sun"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
                   >
                     <Sun className="h-5 w-5" />
                   </motion.div>
                 ) : (
                   <motion.div
                     key="moon"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
                   >
                     <Moon className="h-5 w-5" />
                   </motion.div>
@@ -118,13 +142,13 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* MOBILE TOGGLE */}
           <div className="flex items-center gap-2 md:hidden">
-            <Button
+             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className={`rounded-full ${isDark ? 'text-orange-300' : 'text-amber-800'}`}
+              className={`rounded-xl ${isDark ? 'text-[#86efac]' : 'text-[#2d5a43]'}`}
             >
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
@@ -132,44 +156,38 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`${isDark ? 'text-orange-300' : 'text-amber-800'}`}
+              className={isDark ? 'text-[#e2f3e9]' : 'text-[#1a3c2a]'}
             >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU PANEL */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className={`md:hidden border-t ${
-              isDark
-                ? 'bg-gradient-to-b from-zinc-900 to-stone-900 border-zinc-700'
-                : 'bg-gradient-to-b from-amber-100 to-orange-200 border-orange-300'
-            }`}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-4 right-4 mt-2 p-4 rounded-[2rem] border backdrop-blur-2xl shadow-2xl md:hidden
+            bg-white/90 dark:bg-[#061a11]/95 border-[#a8d5ba]/30 dark:border-[#2d5a43]/50"
           >
-            <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.label}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
-                  className={`transition-colors font-medium py-2 ${
-                    isDark
-                      ? 'text-orange-200 hover:text-orange-400'
-                      : 'text-amber-700 hover:text-orange-900'
-                  }`}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`
+                    w-full text-left px-6 py-4 rounded-2xl font-['Cinzel'] font-bold text-xs tracking-widest
+                    transition-colors flex items-center justify-between group
+                    ${isDark ? 'text-[#a8d5ba] hover:bg-[#2d5a43]/30' : 'text-[#2d5a43] hover:bg-[#a8d5ba]/20'}
+                  `}
                 >
                   {item.label}
-                </a>
+                  <Sparkles size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </button>
               ))}
             </div>
           </motion.div>

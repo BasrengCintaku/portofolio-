@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Code2, Video, Coffee, Rocket, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Code2, Video, ChevronDown, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 
 export default function AboutSection() {
@@ -8,8 +8,6 @@ export default function AboutSection() {
   const stats = [
     { icon: Code2, value: '10+', label: 'Projects' },
     { icon: Video, value: '10+', label: 'Content' },
-    // { icon: Coffee, value: '1000+', label: 'Coffee' },
-    // { icon: Rocket, value: '5+', label: 'Experience' },
   ];
 
   const accordion = [
@@ -30,151 +28,169 @@ export default function AboutSection() {
     },
     {
       title: 'Apa Hobi Saya?',
-      content:
-        'Saya sering bermain FF',
+      content: 'Kadang ngoding, kadang main game... biar balance kayak raja 😏',
     },
   ];
 
   return (
     <section
       id="about"
-      className="py-20 md:py-32 
-      bg-gradient-to-b from-amber-50 to-orange-100
-      dark:from-zinc-900 dark:to-neutral-900"
+      className="relative py-24 md:py-32 overflow-hidden
+      bg-gradient-to-b from-[#d1e9d6] via-[#e2f3e9] to-[#f0f9f1]
+      dark:from-[#04140c] dark:via-[#061a11] dark:to-[#0a2a1b]"
     >
-      <div className="container mx-auto px-4">
+      {/* GLOW DECORATION */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#86efac]/20 dark:bg-[#1a3c2a]/40 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10">
 
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="text-orange-500 font-medium mb-2 block">
-            About Me
-          </span>
+          <div className="inline-flex items-center gap-2 mb-3">
+            <Sparkles className="w-4 h-4 text-[#2d5a43] dark:text-[#86efac]" />
+            <span className="text-[#2d5a43] dark:text-[#a8d5ba] font-bold uppercase tracking-[0.2em] text-xs">
+              Mengenal Kerajaan
+            </span>
+          </div>
 
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4
-          text-amber-900 dark:text-orange-200">
-            Mengenal Lebih Dekat
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-6 text-[#1a3c2a] dark:text-[#e2f3e9]"
+            style={{ fontFamily: "'Cinzel', serif" }}
+          >
+            Tentang Saya
           </h2>
 
-          <div className="w-20 h-1 mx-auto rounded-full
-          bg-amber-400 dark:bg-orange-500" />
+          <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-transparent via-[#3d7a5a] to-transparent dark:via-[#86efac]" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
 
-          {/* FOTO / VISUAL */}
+          {/* VISUAL (CRYSTAL BOX) */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative group"
+            className="relative"
           >
             <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity }}
-              className="aspect-square rounded-2xl overflow-hidden
-              bg-amber-200 dark:bg-zinc-800
-              flex items-center justify-center text-7xl
-              shadow-[0_0_40px_rgba(251,191,36,0.3)]
-              dark:shadow-[0_0_40px_rgba(251,146,60,0.2)]"
+              animate={{ y: [0, -15, 0], rotate: [0, 2, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="aspect-square rounded-[3rem] overflow-hidden relative
+              bg-gradient-to-br from-[#a8d5ba] to-[#3d7a5a]
+              dark:from-[#1a3c2a] dark:to-[#061a11]
+              flex items-center justify-center text-8xl shadow-2xl"
             >
-            🏰
+              {/* Overlay Glass Effect */}
+              <div className="absolute inset-0 bg-white/10 dark:bg-white/5 backdrop-blur-[2px]" />
+              <span className="relative z-10 drop-shadow-2xl">🏰</span>
+              
+              {/* Shimmer Line */}
+              <motion.div 
+                animate={{ x: ['-100%', '200%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+              />
             </motion.div>
 
-            {/* FLOATING CARD */}
-            <div className="absolute -bottom-6 -right-6 p-4 rounded-xl
-            bg-amber-300 text-amber-900
-            dark:bg-zinc-800 dark:text-orange-300
-            shadow-lg">
-              <p className="font-bold text-xl">5+ Tahun</p>
-              <p className="text-xs opacity-80">Experience</p>
-            </div>
+            {/* FLOATING EXPERIENCE CARD */}
+            <motion.div 
+              initial={{ x: 20, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="absolute -bottom-8 -right-4 md:-right-8 p-6 rounded-[2rem]
+              bg-white/80 dark:bg-[#163d29]/90 backdrop-blur-xl
+              border border-[#a8d5ba]/50 dark:border-[#2d5a43]/50 shadow-2xl"
+            >
+              <p className="font-['Cinzel'] font-bold text-3xl text-[#1a3c2a] dark:text-[#86efac]">
+                5+ <span className="text-sm align-middle">Tahun</span>
+              </p>
+              <p className="text-[10px] uppercase tracking-widest font-bold opacity-60 text-[#2d5a43] dark:text-[#a8d5ba]">
+                Pengalaman Digital
+              </p>
+            </motion.div>
           </motion.div>
 
-          {/* TEXT + ACCORDION */}
+          {/* TEXT & INTERACTION */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <h3 className="font-display text-2xl md:text-3xl font-bold
-            text-amber-900 dark:text-orange-200">
-              Aldiof Basten
-            </h3>
+            <div className="space-y-4">
+              <h3
+                className="text-3xl font-bold text-[#1a3c2a] dark:text-[#e2f3e9]"
+                style={{ fontFamily: "'Cinzel', serif" }}
+              >
+                Aldiof Basten
+              </h3>
+              <p className="text-lg leading-relaxed text-[#2d5a43] dark:text-[#a8d5ba]/80">
+                Membangun ekosistem digital yang harmonis antara <span className="font-bold border-b-2 border-[#3d7a5a]">estetika visual</span> dan <span className="font-bold border-b-2 border-[#3d7a5a]">kekuatan fungsional</span>.
+              </p>
+            </div>
 
-            <p className="text-sm md:text-base leading-relaxed
-            text-amber-800 dark:text-orange-200/80">
-              Saya membangun aplikasi web modern yang tidak hanya fungsional,
-              tapi juga nyaman digunakan. Fokus saya adalah performa, desain,
-              dan pengalaman pengguna.
-            </p>
-
-            {/* ACCORDION */}
-            <div className="space-y-3">
+            {/* ACCORDION (SAGE THEME) */}
+            <div className="space-y-4">
               {accordion.map((item, i) => (
                 <div
                   key={i}
-                  className="rounded-xl overflow-hidden
-                  bg-amber-200 dark:bg-zinc-800"
+                  className="rounded-2xl overflow-hidden border border-[#a8d5ba]/30 dark:border-[#2d5a43]/50
+                  bg-white/40 dark:bg-[#163d29]/40 backdrop-blur-sm transition-all"
                 >
                   <button
-                    onClick={() =>
-                      setOpenIndex(openIndex === i ? null : i)
-                    }
-                    className="w-full flex items-center justify-between px-4 py-3 text-left"
+                    onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                    className="w-full flex items-center justify-between px-6 py-4 text-left group"
                   >
-                    <span className="font-medium text-amber-900 dark:text-orange-200">
+                    <span className="font-bold text-[#1a3c2a] dark:text-[#e2f3e9] group-hover:text-[#3d7a5a] transition-colors">
                       {item.title}
                     </span>
-
                     <ChevronDown
-                      className={`transition-transform ${
+                      className={`h-5 w-5 text-[#3d7a5a] dark:text-[#86efac] transition-transform duration-300 ${
                         openIndex === i ? 'rotate-180' : ''
                       }`}
                     />
                   </button>
 
-                  {openIndex === i && (
-                    <div className="px-4 pb-4 text-sm
-                    text-amber-800 dark:text-orange-200/80">
-                      {item.content}
-                    </div>
-                  )}
+                  <AnimatePresence>
+                    {openIndex === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="px-6 pb-5 text-[#2d5a43] dark:text-[#a8d5ba]/90 leading-relaxed text-sm"
+                      >
+                        {item.content}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ))}
             </div>
 
-            {/* STATS */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
+            {/* STATS CARDS */}
+            <div className="grid grid-cols-2 gap-6 pt-4">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="p-4 rounded-xl text-center
-                  bg-amber-200 dark:bg-zinc-800
-                  hover:scale-105 transition"
+                  whileHover={{ y: -5 }}
+                  className="p-6 rounded-3xl text-center
+                  bg-[#2d5a43] dark:bg-[#a8d5ba] group transition-all duration-300 shadow-lg"
                 >
-                  <stat.icon className="h-5 w-5 mx-auto mb-2
-                  text-amber-900 dark:text-orange-300" />
+                  <stat.icon className="h-6 w-6 mx-auto mb-3
+                  text-[#f0f9f1] dark:text-[#061a11]" />
 
-                  <p className="text-xl font-bold
-                  text-amber-900 dark:text-orange-200">
+                  <p className="text-2xl font-bold font-['Cinzel']
+                  text-[#f0f9f1] dark:text-[#061a11]">
                     {stat.value}
                   </p>
 
-                  <p className="text-xs
-                  text-amber-800 dark:text-orange-200/70">
+                  <p className="text-[10px] font-bold uppercase tracking-widest
+                  text-[#a8d5ba] dark:text-[#2d5a43]">
                     {stat.label}
                   </p>
                 </motion.div>
