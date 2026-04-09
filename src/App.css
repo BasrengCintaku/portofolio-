@@ -1,42 +1,35 @@
+/* Sembunyikan kursor asli di semua elemen */
+* {
+  cursor: none !important;
+}
+
+/* Memastikan area root memenuhi layar agar kursor tidak terpotong */
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
 }
 
+/* Style sisanya tetap seperti yang kamu punya... */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+/* ... dan seterusnya */
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* index.css atau App.css */
+
+@layer base {
+  html, body, * {
+    cursor: none !important;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Tambahan khusus untuk elemen interaktif yang sering memunculkan kursor balik */
+a, button, input, textarea, [role="button"] {
+  cursor: none !important;
 }
